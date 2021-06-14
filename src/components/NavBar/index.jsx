@@ -1,3 +1,4 @@
+import { Cart } from './CartWidget/cart';
 import './styles.css';
 const menu = ['Cuidado del cabello', 'Cuidado de la piel', 'Make-up']
 
@@ -24,6 +25,8 @@ export const Nav = () => {
                         </li>
                     </ul>
                 </div>
+                <Cart />
+
             </div>
         </nav>
     )
