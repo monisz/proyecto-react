@@ -12,6 +12,3 @@ export const Cart = () => {
 }
 
 //ReactDOM.render(element, document.body)
-
-
-//<FontAwesomeIcon icon={faShoppingCart} />

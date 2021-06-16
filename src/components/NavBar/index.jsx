@@ -4,7 +4,6 @@ const menu = ['Cuidado del cabello', 'Cuidado de la piel', 'Make-up']
 
 export const Nav = () => {
     return (
-        // eslint-disable
         <nav className="navbar navbar-expand-lg navbar-light barraNavegacion">
             <div className="container-fluid">
                 <img className="logo" src="/imagenes/logo-beauty2.png" alt="logo" />
@@ -26,7 +25,6 @@ export const Nav = () => {
                     </ul>
                 </div>
                 <Cart />
-
             </div>
         </nav>
     )
