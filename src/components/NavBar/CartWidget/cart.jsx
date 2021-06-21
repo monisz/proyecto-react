@@ -1,14 +1,12 @@
-//import ReactDOM from 'react-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import './styles.css';
 
-export const Cart = () => {
+export const Cart = ({cantidadCarrito}) => {
     return (
-        <div className="icono">
+        <div className="carrito">
             <FontAwesomeIcon icon={faShoppingCart} />
+            <p>({cantidadCarrito})</p>
         </div>
     )
 }
-
-//ReactDOM.render(element, document.body)

@@ -2,7 +2,8 @@ import { Cart } from './CartWidget/cart';
 import './styles.css';
 const menu = ['Cuidado del cabello', 'Cuidado de la piel', 'Make-up']
 
-export const Nav = () => {
+export const Nav = ({cantidadCarrito}) => {
+    console.log(cantidadCarrito);
     return (
         <nav className="navbar navbar-expand-lg navbar-light barraNavegacion">
             <div className="container-fluid">
@@ -24,7 +25,7 @@ export const Nav = () => {
                         </li>
                     </ul>
                 </div>
-                <Cart />
+                <Cart cantidadCarrito={cantidadCarrito}/>
             </div>
         </nav>
     )

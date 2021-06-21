@@ -1,0 +1,18 @@
+.item-count {
+    border: 3px solid rgb(235, 62, 62);
+    display: flex;
+    justify-content: space-around;
+}
+
+.boton-contador {
+    font-weight: 700;
+}
+
+.boton-contador:focus {
+    box-shadow:none;
+}
+
+.contador {
+    text-align: center;
+    border: none;
+}
