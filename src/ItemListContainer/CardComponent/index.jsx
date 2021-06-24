@@ -1,6 +1,6 @@
-import { ItemCount } from "./ItemCount";
+/* import { ItemCount } from "../ItemList/Item/ItemCount";
 
-export const Card = ({title = 'error en la carga', price = 'error en la carga', carrito}) => {
+export const Card = (title, price, carrito) => {
     if (title && price) {
         return (
             <div className="card" style= {{width: '18rem'}}>
@@ -14,4 +14,4 @@ export const Card = ({title = 'error en la carga', price = 'error en la carga', 
             </div>
         )
     }
-}
+} */
