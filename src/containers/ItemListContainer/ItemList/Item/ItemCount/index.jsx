@@ -7,6 +7,8 @@ export const ItemCount = (props) => {
     function onAdd() {
         if (contador < props.stock) {
             setContador(parseInt(contador)+1)
+        } else {
+            alert(`el stock disponible es de ${props.stock}`)
         }
     }
 
@@ -14,7 +16,7 @@ export const ItemCount = (props) => {
         if (contador > 1) {
             setContador(parseInt(contador)-1)
         } else {
-            alert("no puede ser menor de 0")
+            alert("no puede ser menor de 1")
         }
     }
 
