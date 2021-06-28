@@ -1,7 +1,6 @@
 import { ItemCount } from "./ItemCount";
 
 export const Item = ({productos, carrito}) => {
-    console.log(productos, "en item solito");
     console.log(carrito);
     if (productos.title && productos.price) {
         return (

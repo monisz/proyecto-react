@@ -1,15 +1,16 @@
-/* import { Nav } from '../../components/NavBar';
-import { Saludo } from './saludo';
-import { Card } from './CardComponent';
+import { Nav } from '../../components/NavBar';
+import { Saludo } from '../../components/saludo';
 import { useState, useEffect } from 'react';
-import { ItemList } from './ItemList';
-import "./styles.css";
+//import { ItemList } from './ItemList';
+import "../ItemListContainer/styles.css";
 import { fetchData } from '../../utils/funciones';
+import { ItemDetail } from '../../components/ItemDetail';
 
 export const Home = () => {
     const usuario = {name: "NN"};
     const [carrito, setCarrito] = useState([]);
-    const [productos, setProductos] = useState([]);
+    //const [productos, setProductos] = useState([]);
+    const [item, setItem] = useState([]);
     const categoria = "make-up";
 
 //Primer intento de fetch
@@ -30,32 +31,34 @@ export const Home = () => {
     }, []) */
 
 //Cambio a productos ML, con función importada de utils
-    /* useEffect ( () => {
+    useEffect ( () => {
         const esperarDatos = async () => {
-            console.log(await fetchData(categoria))
             const results = await fetchData(categoria);
-            setProductos(results)
+            console.log(results);
+            setItem(results[3]);
         }
         esperarDatos()
-        console.log(productos)
-    }, []) */
+    }, [])
+    
 
-    /* return (
+    return (
         <div className="App">
             <body>
                 <header>
                     <Nav cantidadCarrito={carrito.length}/>
-                    <h3 style= {{display: 'flex', justifyContent: 'center'}} >
+                    <h5 style= {{display: 'flex', justifyContent: 'center'}} >
                         DESAFIO CLASE 7
-                    </h3>
+                    </h5>
                     <Saludo dataUsuario={usuario} title={'Bienvenido '}/>
                 </header>
-                <main>  
-                    <ItemList carrito={carrito} productos={productos} />
-                    <Card title={'Lápiz labial'} price={700} carrito={carrito}/>
-                    <button className="btn btn-primary" onClick={() => {setCarrito([...carrito, {id: 1, name: 'Lápiz labial'}])}}>Agregar al carrito</button>
+                <main>
+                    <ItemDetail item={item} />
+                    {/* <ItemList carrito={carrito} productos={productos} /> */}
+                    <div className="boton-agregar" >
+                        <button className="btn btn-primary boton-agregar" onClick={() => {setCarrito([...carrito, {id: 1, name: 'Lápiz labial'}])}}>Agregar al carrito</button>
+                    </div>
                 </main>    
             </body>
         </div>
     )
-} */
+}

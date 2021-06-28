@@ -3,3 +3,8 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
+
+.boton-agregar {
+    display: flex;
+    justify-content: center;
+}
