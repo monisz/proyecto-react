@@ -1,64 +1,33 @@
-import { Nav } from '../../components/NavBar';
-import { Saludo } from '../../components/saludo';
 import { useState, useEffect } from 'react';
-//import { ItemList } from './ItemList';
 import "../ItemListContainer/styles.css";
 import { fetchData } from '../../utils/funciones';
 import { ItemDetail } from '../../components/ItemDetail';
+import { useParams } from 'react-router-dom';
 
-export const Home = () => {
-    const usuario = {name: "NN"};
-    const [carrito, setCarrito] = useState([]);
-    //const [productos, setProductos] = useState([]);
-    const [item, setItem] = useState([]);
-    const categoria = "make-up";
+export const ItemDetailContainer = () => {
+    const { id_producto } = useParams();
+    const categoria = `items/${id_producto}`;
+    const [itemDetalle, setItemDetalle] = useState();
+    console.log(id_producto)
 
-//Primer intento de fetch
-    /* useEffect ( async () => {
-        const response = await fetch("./productos/productos.json");
-        const json = await response.json();  
-        setProductos(json);
-    }, []) */
-
-//Mejorado con recomend. de React
-    /* useEffect ( () => {
-        async function fetchData() {
-            const response = await fetch("./productos/productos.json");
-            const json = await response.json();
-            setProductos(json);
-        }
-        fetchData();
-    }, []) */
-
-//Cambio a productos ML, con función importada de utils
     useEffect ( () => {
-        const esperarDatos = async () => {
-            const results = await fetchData(categoria);
-            console.log(results);
-            setItem(results[3]);
-        }
-        esperarDatos()
-    }, [])
-    
+        (async () => {
+            const result = await fetchData(categoria);
+            console.log(result)
+            setItemDetalle(result)
+        })()
+        console.log("entre al useEffect")
+    }, [id_producto])
 
+    console.log(itemDetalle)
     return (
-        <div className="App">
-            <body>
-                <header>
-                    <Nav cantidadCarrito={carrito.length}/>
-                    <h5 style= {{display: 'flex', justifyContent: 'center'}} >
-                        DESAFIO CLASE 7
-                    </h5>
-                    <Saludo dataUsuario={usuario} title={'Bienvenido '}/>
-                </header>
-                <main>
-                    <ItemDetail item={item} />
-                    {/* <ItemList carrito={carrito} productos={productos} /> */}
-                    <div className="boton-agregar" >
-                        <button className="btn btn-primary boton-agregar" onClick={() => {setCarrito([...carrito, {id: 1, name: 'Lápiz labial'}])}}>Agregar al carrito</button>
-                    </div>
-                </main>    
-            </body>
+        <div>
+            {itemDetalle ?
+                <ItemDetail item={itemDetalle} />
+                : 
+                <p>Elemento no encontrado</p>}
+                {/* <ItemList carrito={carrito} productos={productos} /> */}
+                    
         </div>
     )
 }

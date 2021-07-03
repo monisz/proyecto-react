@@ -1,6 +1,7 @@
 export async function fetchData(categoria) {
-    const response = await fetch(`https://api.mercadolibre.com/sites/MLA/search?q=${categoria}`);
+    const response = await fetch(`https://api.mercadolibre.com/${categoria}`);
     const datos = await response.json();
-    console.log(datos.results);
-    return datos.results;
+    console.log(datos);
+    console.log(categoria)
+    return datos;
 }

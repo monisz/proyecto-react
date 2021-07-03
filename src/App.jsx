@@ -1,14 +1,30 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
-//import { Home } from './containers/ItemListContainer';
-import { Home } from './containers/ItemDetailContainer';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { ItemListContainer} from './containers/ItemListContainer';
+import { ContactContainer} from './containers/ContactContainer';
+import { Nav } from './components/NavBar';
+import { useState } from 'react';
+import { ItemDetailContainer } from './containers/ItemDetailContainer';
 
 function App() {
+  const [carrito, setCarrito] = useState([]);
+
   return (
-    <div>
-      <Home />
-    </div>
+    <BrowserRouter>
+    <nav>
+      <Nav cantidadCarrito={carrito.length}/>
+    </nav>
+    <Switch>
+      <Route exact path="/" component={ItemListContainer} />
+      <Route path="/contacto" component={ContactContainer} />
+      <Route path="/detalle/:id_producto" component={ItemDetailContainer} />
+    </Switch>
+    <footer>
+
+    </footer>
+    </BrowserRouter>
   );
 }
 

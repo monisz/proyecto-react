@@ -1,25 +1,15 @@
-/* import { Nav } from '../../components/NavBar';
-import { Saludo } from './saludo';
-import { Card } from './CardComponent';
+import { Saludo } from '../../components/saludo';
 import { useState, useEffect } from 'react';
 import { ItemList } from './ItemList';
 import "./styles.css";
 import { fetchData } from '../../utils/funciones';
 
-export const Home = () => {
+export const ItemListContainer = () => {
     const usuario = {name: "NN"};
-    const [carrito, setCarrito] = useState([]);
     const [productos, setProductos] = useState([]);
-    const categoria = "make-up";
+    const categoria = "sites/MLA/search?q=make-up";
 
-//Primer intento de fetch
-    /* useEffect ( async () => {
-        const response = await fetch("./productos/productos.json");
-        const json = await response.json();  
-        setProductos(json);
-    }, []) */
-
-//Mejorado con recomend. de React
+//Mejorado con recomend. de React - fech a json propio
     /* useEffect ( () => {
         async function fetchData() {
             const response = await fetch("./productos/productos.json");
@@ -30,32 +20,29 @@ export const Home = () => {
     }, []) */
 
 //Cambio a productos ML, con función importada de utils
-    /* useEffect ( () => {
-        const esperarDatos = async () => {
+    useEffect ( () => {
+        (async () => {
             console.log(await fetchData(categoria))
             const results = await fetchData(categoria);
-            setProductos(results)
-        }
-        esperarDatos()
-        console.log(productos)
-    }, []) */
+            setProductos(results.results)
+        })() 
+    }, [])
 
-    /* return (
+    return (
         <div className="App">
-            <body>
-                <header>
-                    <Nav cantidadCarrito={carrito.length}/>
-                    <h3 style= {{display: 'flex', justifyContent: 'center'}} >
-                        DESAFIO CLASE 7
-                    </h3>
-                    <Saludo dataUsuario={usuario} title={'Bienvenido '}/>
-                </header>
-                <main>  
-                    <ItemList carrito={carrito} productos={productos} />
-                    <Card title={'Lápiz labial'} price={700} carrito={carrito}/>
-                    <button className="btn btn-primary" onClick={() => {setCarrito([...carrito, {id: 1, name: 'Lápiz labial'}])}}>Agregar al carrito</button>
-                </main>    
-            </body>
+            <h5 style= {{display: 'flex', justifyContent: 'center'}} >
+                PRIMERA ENTREGA PROYECTO FINAL
+            </h5>
+            <Saludo dataUsuario={usuario} title={'Bienvenido '}/>
+            {/* <ItemDetail item={item} /> */}
+            {/* <Route path="/categoria" component={ItemList} /> */}
+            {<ItemList productos={productos} />}
+            <div className="boton-agregar" >
+                <button className="btn btn-primary boton-agregar" onClick={() => 
+                    /* {setCarrito([...carrito, {id: 1, name: 'Lápiz labial'}])} */
+                    console.log("esperando que se pueda resolver el carrito")
+                    }>Agregar al carrito</button>
+            </div>
         </div>
     )
-} */
+}
