@@ -5,8 +5,14 @@
 }
 
 .item-count-b {
-    border: 3px solid rgb(235, 62, 62);
     max-width: 80%;
+    margin-bottom: 6%;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #dc3545;
+    border-radius: .25rem;
 }
 
 .boton-contador {
@@ -20,5 +26,5 @@
 .contador {
     text-align: center;
     border: none;
-    max-width: 120px;
+    max-width: 50%;
 }

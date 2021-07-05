@@ -1,8 +1,17 @@
+.detalle {
+    display: flex;
+    justify-content: center;
+}
+
 .detalle-producto {
     display: flex;
     justify-content: center;
-    margin: 2% 10% 1% 10%;
-    width: 70%;
+    margin-top: 2%;
+    padding: 2%;
+    width: 50%;
+    border-radius: 2%;
+    border-radius: 2%;
+    border: 2px solid rgb(235, 62, 62);
 }
 
 .detalle-info {
@@ -11,10 +20,15 @@
 }
 
 .detalle-imagen {
-    width: 50%;
+    width: 40%;
     max-height: 60vh;
 }
 
-.detalle-title, .detalle-precio {
-    font-size: 1.8rem;
+.detalle-title {
+    font-size: 1.4rem;
+    height: 40%;
+}
+
+.detalle-precio {
+    font-size: 1.4rem;
 }

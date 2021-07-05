@@ -3,11 +3,14 @@ import { useState, useEffect } from 'react';
 import { ItemList } from './ItemList';
 import "./styles.css";
 import { fetchData } from '../../utils/funciones';
+import { useParams } from 'react-router-dom';
 
 export const ItemListContainer = () => {
+    const {cat} = useParams();
     const usuario = {name: "NN"};
     const [productos, setProductos] = useState([]);
-    const categoria = "sites/MLA/search?q=make-up";
+    let categoria = "";
+    cat ? categoria = `sites/MLA/search?q=${cat}` : categoria = `sites/MLA/search?q=Belleza`;
 
 //Mejorado con recomend. de React - fech a json propio
     /* useEffect ( () => {
@@ -23,25 +26,25 @@ export const ItemListContainer = () => {
     useEffect ( () => {
         (async () => {
             console.log(await fetchData(categoria))
-            const results = await fetchData(categoria);
+            const results = await fetchData(categoria)
+            console.log(results)
             setProductos(results.results)
         })() 
-    }, [])
+    }, [categoria])
 
     return (
         <div className="App">
-            <h5 style= {{display: 'flex', justifyContent: 'center'}} >
+            <h5>
                 PRIMERA ENTREGA PROYECTO FINAL
             </h5>
             <Saludo dataUsuario={usuario} title={'Bienvenido '}/>
-            {/* <ItemDetail item={item} /> */}
-            {/* <Route path="/categoria" component={ItemList} /> */}
-            {<ItemList productos={productos} />}
+            <ItemList productos={productos} />
             <div className="boton-agregar" >
                 <button className="btn btn-primary boton-agregar" onClick={() => 
                     /* {setCarrito([...carrito, {id: 1, name: 'Lápiz labial'}])} */
                     console.log("esperando que se pueda resolver el carrito")
-                    }>Agregar al carrito</button>
+                    }>Agregar al carrito
+                </button>
             </div>
         </div>
     )

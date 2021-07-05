@@ -20,10 +20,8 @@ function App() {
       <Route exact path="/" component={ItemListContainer} />
       <Route path="/contacto" component={ContactContainer} />
       <Route path="/detalle/:id_producto" component={ItemDetailContainer} />
+      <Route path="/categoria/:cat" component={ItemListContainer} />
     </Switch>
-    <footer>
-
-    </footer>
     </BrowserRouter>
   );
 }

@@ -1,3 +1,22 @@
+# Tienda Beauty
+
+## Este es mi proyecto en el curso de React.
+## Es un e-commerce genérico, pero en este caso está aplicado a productos de belleza.
+Se va modificando de acuerdo a los desafíos propuestos en el curso.
+
+## Tecnologías utilizadas
+React
+HTML
+CSS
+Se incluyó Bootstrap (utilizado para diferentes estilos de la App) 
+y Fontawesome (por ahora solo utilizado para el ícono del carrito)
+También utilicé Canva para crear el logo de la tienda.
+
+###
+Por el momento, elegí que los productos se traigan desde la API de ML, para poder practicar su uso.
+Quizás, con el avance del curso cambie a un json propio, si bien las primeras entregas fueron de esa manera.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -2,7 +2,7 @@ import { Cart } from './CartWidget/cart';
 import { Link } from 'react-router-dom';
 import './styles.css';
 
-const menu = ['Home', 'Productos', 'Contacto']
+const menu = ['Home', 'Cuidado del cabello', 'Make-up', 'Contacto']
 
 export const Nav = ({cantidadCarrito}) => {
     console.log(cantidadCarrito);
@@ -20,10 +20,13 @@ export const Nav = ({cantidadCarrito}) => {
                             <Link to="/" class="nav-link active" aria-current="page">{menu[0]}</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/productos" className="nav-link">{menu[1]}</Link>
-                        </li>                               
+                            <Link to={`/categoria/${menu[1]}`} className="nav-link">{menu[1]}</Link>
+                        </li>
                         <li className="nav-item">
-                            <Link to="/contacto" className="nav-link">{menu[2]}</Link>
+                            <Link to={`/categoria/${menu[2]}`} className="nav-link">{menu[2]}</Link>
+                        </li>                                                              
+                        <li className="nav-item">
+                            <Link to="/contacto" className="nav-link">{menu[3]}</Link>
                         </li>
                     </ul>
                 </div>

@@ -1,0 +1,27 @@
+.item {
+    max-width: 15rem;
+    border-radius: 2%;
+    border: 1px solid rgb(235, 62, 62);
+    margin-bottom: 2%;
+    height: 28rem;
+}
+
+.contenedor-imagen {
+    width: 100%;
+    height: 40%;
+}
+
+.imagen {
+    padding-top: 5%;
+    max-width: 160px;
+    max-height: 160px;
+}
+
+.titulo {
+    height: 40%;
+    font-size: 1.2rem;
+}
+
+.boton-verDetalle {
+    color: white;
+}
