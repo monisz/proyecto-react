@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { fetchData } from '../../utils/funciones';
 import { ItemDetail } from '../../components/ItemDetail';
 import { useParams } from 'react-router-dom';
+import { LoaderComponent } from '../../components/LoaderComponent';
 
 export const ItemDetailContainer = () => {
     const { id_producto } = useParams();
@@ -20,11 +21,10 @@ export const ItemDetailContainer = () => {
 
     console.log(itemDetalle)
     return (
-        <div className="fondo">
-            {itemDetalle ?
-                <ItemDetail item={itemDetalle} />
-                : 
-                <p>Elemento no encontrado</p>}                    
+        <div>
+            {(Object.keys(itemDetalle).length === 0) ?
+                <LoaderComponent />                   
+                : <ItemDetail item={itemDetalle} /> }
         </div>
     )
 }

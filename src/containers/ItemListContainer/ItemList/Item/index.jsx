@@ -19,6 +19,6 @@ export const Item = ({ producto }) => {
                     </button>
                 </div>
             </div>
-        );
+        )
     }
-};
+}

@@ -4,6 +4,7 @@ import { ItemList } from './ItemList';
 import "./styles.css";
 import { fetchData } from '../../utils/funciones';
 import { useParams } from 'react-router-dom';
+import { LoaderComponent } from '../../components/LoaderComponent';
 
 export const ItemListContainer = () => {
     const {cat} = useParams();
@@ -32,20 +33,20 @@ export const ItemListContainer = () => {
         })() 
     }, [categoria])
 
-    return (
-        <div className="App">
-            <h5>
-                PRIMERA ENTREGA PROYECTO FINAL
-            </h5>
-            <Saludo dataUsuario={usuario} title={'Bienvenido '}/>
-            <ItemList productos={productos} />
-            <div className="boton-agregar" >
-                <button className="btn btn-primary boton-agregar" onClick={() => 
-                    /* {setCarrito([...carrito, {id: 1, name: 'Lápiz labial'}])} */
-                    console.log("esperando que se pueda resolver el carrito")
-                    }>Agregar al carrito
-                </button>
+    
+    if (productos.length === 0) {
+        return (
+            <LoaderComponent />
+        )
+    } else { 
+        return (
+            <div className="App">
+                <h5>
+                    PRIMERA ENTREGA PROYECTO FINAL
+                </h5>
+                <Saludo dataUsuario={usuario} title={'Bienvenido '}/>
+                <ItemList productos={productos} />
             </div>
-        </div>
-    )
+        )
+    } 
 }
