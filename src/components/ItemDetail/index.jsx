@@ -1,8 +1,19 @@
 import { ItemCount } from "../../containers/ItemListContainer/ItemList/Item/ItemCount"
 import './styles.css';
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const ItemDetail = ({item}) => {
   console.log(item)
+  const [pedido, setPedido] = useState(false);
+  console.log(pedido)
+  
+  function onAdd (contador) {
+    setPedido(true)
+    console.log(contador)
+  }
+
+  
   return (
     <div className="detalle">
       <div className="detalle-producto">
@@ -11,16 +22,10 @@ export const ItemDetail = ({item}) => {
           <h5 className="detalle-title">{item.title}</h5>
           <p className="detalle-text">{item.description || "Descripción del producto"}</p>
           <h5 className="detalle-precio">$ {item.price}</h5>
-          <ItemCount stock={item.available_quantity} initial="1" />
-          <div className="boton-agregar">
-            <button className="btn btn-primary boton-agregar" onClick={() => {
-              /* {setCarrito([...carrito, {id: 1, name: 'Lápiz labial'}])} */
-              console.log("esperando que se pueda resolver el carrito")
-              }}>Agregar al carrito</button>
-          <div/>
+          {!pedido ? <ItemCount stock={item.available_quantity} initial="1" onAdd={onAdd}/>
+                    : <button className="btn btn-primary btn-terminar"><Link className="terminar" to={"/cart"}>Terminar compra</Link></button>}
         </div>
       </div>
-    </div>
     </div>
   )
 }

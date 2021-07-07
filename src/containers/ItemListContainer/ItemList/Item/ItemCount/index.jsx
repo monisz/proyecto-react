@@ -1,18 +1,18 @@
 import { useState } from "react";
 import "./styles.css";
 
-export const ItemCount = (props) => {
-    const [contador, setContador] = useState(props.initial);
+export const ItemCount = ({stock, initial, onAdd}) => {
+    const [contador, setContador] = useState(initial);
 
-    function onAdd() {
-        if (contador < props.stock) {
+    function sumar() {
+        if (contador < stock) {
             setContador(parseInt(contador) + 1);
         } else {
-            alert(`el stock disponible es de ${props.stock}`);
+            alert(`el stock disponible es de ${stock}`);
         }
     }
 
-    function onSubstract() {
+    function restar() {
         if (contador > 1) {
             setContador(parseInt(contador) - 1);
         } else {
@@ -21,12 +21,19 @@ export const ItemCount = (props) => {
     }
 
     return (
+        <>
         <div className="item-count">
             <div className="item-count-b">
-                <button type="button" className="btn boton-contador" onClick={onSubstract}> - </button>
+                <button type="button" className="btn boton-contador" onClick={restar}> - </button>
                 <input className="contador" type="text" value={contador} />
-                <button type="button" className="btn boton-contador" onClick={onAdd}> + </button>
+                <button type="button" className="btn boton-contador" onClick={sumar}> + </button>
             </div>
         </div>
-    );
-};
+        <div>
+            <button className="btn btn-primary btn-agregar" 
+                onClick={() => {onAdd(contador)}}>Agregar al carrito
+            </button>
+        </div>
+        </>
+    )
+}

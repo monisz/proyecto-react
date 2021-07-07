@@ -28,3 +28,8 @@
     border: none;
     max-width: 50%;
 }
+
+.btn-agregar:hover {
+    font-weight:bolder;
+    text-decoration: none;
+}

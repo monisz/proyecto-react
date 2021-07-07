@@ -34,19 +34,15 @@ export const ItemListContainer = () => {
     }, [categoria])
 
     
-    if (productos.length === 0) {
-        return (
-            <LoaderComponent />
-        )
-    } else { 
-        return (
-            <div className="App">
-                <h5>
-                    PRIMERA ENTREGA PROYECTO FINAL
-                </h5>
-                <Saludo dataUsuario={usuario} title={'Bienvenido '}/>
-                <ItemList productos={productos} />
-            </div>
-        )
-    } 
+    if (!productos.length) return <LoaderComponent />;
+
+    return (
+        <div className="App">
+            <h5>
+                DESAFIO CLASE 9
+            </h5>
+            <Saludo dataUsuario={usuario} title={'Bienvenido '}/>
+            <ItemList productos={productos} />
+        </div>
+    )
 }

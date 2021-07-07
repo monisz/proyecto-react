@@ -9,19 +9,20 @@
     margin-top: 2%;
     padding: 2%;
     width: 50%;
+    height: 70%;
     border-radius: 2%;
     border-radius: 2%;
     border: 2px solid rgb(235, 62, 62);
 }
 
-.detalle-info {
-    text-align: center;
-    width: 50%;
-}
-
 .detalle-imagen {
     width: 40%;
     max-height: 60vh;
+}
+
+.detalle-info {
+    text-align: center;
+    width: 50%;
 }
 
 .detalle-title {
@@ -31,4 +32,19 @@
 
 .detalle-precio {
     font-size: 1.4rem;
+}
+
+.btn-terminar {
+    margin-top: 10%;
+}
+
+.terminar {
+    color: white;
+    margin-top: 10%;
+}
+
+.terminar:hover {
+    color: white;
+    font-weight:bolder;
+    text-decoration: none;
 }
