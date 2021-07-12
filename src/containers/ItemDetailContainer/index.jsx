@@ -4,6 +4,7 @@ import { ItemDetail } from '../../components/ItemDetail';
 import { useParams } from 'react-router-dom';
 import { LoaderComponent } from '../../components/LoaderComponent';
 
+
 export const ItemDetailContainer = () => {
     const { id_producto } = useParams();
     console.log(id_producto)

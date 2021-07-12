@@ -1,0 +1,10 @@
+.spinner {
+    margin-top: 5%;
+    display: flex;
+    justify-content: center;
+}
+
+.leyenda-spinner {
+    margin-left: 5%;
+    width: 100%;
+}

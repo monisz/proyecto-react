@@ -6,7 +6,9 @@ export const Cart = ({cantidadCarrito}) => {
     return (
         <div className="carrito">
             <FontAwesomeIcon icon={faShoppingCart} />
-            <p className="cantidadCarrito">({cantidadCarrito})</p>
+            <div className="numero-carrito">
+                <span className="cantidad-carrito">{cantidadCarrito}</span>
+            </div>    
         </div>
     )
 }

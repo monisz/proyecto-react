@@ -1,6 +1,6 @@
 import { Saludo } from '../../components/saludo';
 import { useState, useEffect } from 'react';
-import { ItemList } from './ItemList';
+import { ItemList } from '../../components/ItemList';
 import "./styles.css";
 import { fetchData } from '../../utils/funciones';
 import { useParams } from 'react-router-dom';
@@ -39,7 +39,7 @@ export const ItemListContainer = () => {
     return (
         <div className="App">
             <h5>
-                DESAFIO CLASE 9
+                DESAFIO CLASE 10
             </h5>
             <Saludo dataUsuario={usuario} title={'Bienvenido '}/>
             <ItemList productos={productos} />

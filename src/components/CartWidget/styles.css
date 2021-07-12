@@ -1,0 +1,23 @@
+.carrito {
+    margin-right: 2%;
+    font-size: 1.5rem;
+    height: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.numero-carrito {
+    margin-left: 3%;
+    width: 24px;
+    height: 24px;
+    background-color: black;
+    border-radius: 50%;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+}
+
+.cantidad-carrito {
+    font-size:1rem;
+    color: rgb(235, 62, 62);
+}
