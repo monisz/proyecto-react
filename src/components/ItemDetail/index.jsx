@@ -11,7 +11,9 @@ export const ItemDetail = ({item}) => {
   
   function onAdd (contador) {
     console.log(item, contador)
-    context.addItem({item, contador})
+    const cantidad = Number(contador)
+    console.log(cantidad)
+    context.addItem({item, cantidad})
   }
 
   
@@ -24,7 +26,8 @@ export const ItemDetail = ({item}) => {
           <p className="detalle-text">{item.description || "Descripción del producto"}</p>
           <h5 className="detalle-precio">$ {item.price}</h5>
           <ItemCount stock={item.available_quantity} initial="1" onAdd={onAdd}/>
-          <button className="btn btn-primary btn-terminar"><Link className="terminar" to={"/cart"}>Terminar compra</Link></button>
+          <button className="btn btn-primary btn-detail"><Link className="botones-detail" to={"/"}>Seguir comprando</Link></button>
+          <button className="btn btn-primary btn-detail"><Link className="botones-detail" to={"/cart"}>Terminar compra</Link></button>
         </div>
       </div>
     </div>

@@ -34,13 +34,12 @@
     font-size: 1.4rem;
 }
 
-.btn-terminar {
-    margin-top: 10%;
+.btn-detail {
+    margin-top: 5%;
 }
 
-.terminar {
+.botones-detail {
     color: white;
-    margin-top: 10%;
 }
 
 .terminar:hover {

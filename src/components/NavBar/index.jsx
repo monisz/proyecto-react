@@ -1,11 +1,14 @@
 import { Cart } from '../CartWidget/cart';
 import { Link } from 'react-router-dom';
 import './styles.css';
+import { useContext } from 'react';
+import { CartContext } from '../../context/CartContext';
 
 const menu = ['Home', 'Cuidado del cabello', 'Make-up', 'Contacto']
 
-export const Nav = ({cantidadCarrito}) => {
-    console.log(cantidadCarrito);
+export const Nav = (props) => {
+    const context = useContext(CartContext);
+    
     return (
         <nav className="navbar navbar-expand-lg navbar-light barraNavegacion">
             <div className="container-fluid">
@@ -27,7 +30,8 @@ export const Nav = ({cantidadCarrito}) => {
                         </li>
                     </ul>
                 </div>
-                <Cart cantidadCarrito={cantidadCarrito}/>
+                { context.cartWidget > 0 ? <Cart /> : console.log(context.cartWidget) }
+                {/* <Cart /> */}
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>                        

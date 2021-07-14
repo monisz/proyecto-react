@@ -39,7 +39,7 @@ export const ItemListContainer = () => {
     return (
         <div className="App">
             <h5>
-                DESAFIO CLASE 10
+                DESAFIO CLASE 11
             </h5>
             <Saludo dataUsuario={usuario} title={'Bienvenido '}/>
             <ItemList productos={productos} />
