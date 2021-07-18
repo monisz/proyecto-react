@@ -1,14 +1,27 @@
 import { createContext, useState, useEffect } from "react";
+import { getFirestore } from '../../firebase/client';
 
 export const CartContext = createContext();
 
 export const CartComponentContext = ({children}) => {
+    const [productos, setProductos] = useState([]);
     const [carrito, setCarrito] = useState([]);
     const [precioTotal, setPrecioTotal] = useState(0);
     const [cartWidget, setCartWidget] = useState(0);
     console.log(carrito);
     console.log(precioTotal);
     console.log(cartWidget);
+
+    useEffect ( () => {
+        (async () => {
+            const db = getFirestore();
+            const collection = db.collection("productos")
+            const response = await collection.get()
+            setProductos(response.docs.map( element => {
+                return {id:element.id, ...element.data()}
+            }));
+        }) ();
+    }, []);
 
 
     useEffect ( () => {
@@ -92,8 +105,9 @@ export const CartComponentContext = ({children}) => {
         setCartWidget(cartWidget + cantidad);
     }
 
+
     return (
-        <CartContext.Provider value={{addItem, removeItem, clear, carrito, precioTotal, cartWidget}}>
+        <CartContext.Provider value={{addItem, removeItem, clear, productos, carrito, precioTotal, cartWidget}}>
             {children}
         </CartContext.Provider>
     )

@@ -1,48 +1,36 @@
 import { Saludo } from '../../components/saludo';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext,  } from 'react';
 import { ItemList } from '../../components/ItemList';
 import "./styles.css";
-import { fetchData } from '../../utils/funciones';
-import { useParams } from 'react-router-dom';
 import { LoaderComponent } from '../../components/LoaderComponent';
+import { CartContext } from '../../context/CartContext';
+import { useParams } from 'react-router-dom';
 
 export const ItemListContainer = () => {
+    const context = useContext(CartContext);
+    console.log(context.productos)
     const {cat} = useParams();
+    const [productosXCategoria, setProductosXCategoria] = useState([]);
     const usuario = {name: "NN"};
-    const [productos, setProductos] = useState([]);
-    let categoria = "";
-    cat ? categoria = `sites/MLA/search?q=${cat}` : categoria = `sites/MLA/search?q=Belleza`;
-
-//Mejorado con recomend. de React - fech a json propio
-    /* useEffect ( () => {
-        async function fetchData() {
-            const response = await fetch("./productos/productos.json");
-            const json = await response.json();
-            setProductos(json);
-        }
-        fetchData();
-    }, []) */
-
-//Cambio a productos ML, con función importada de utils
-    useEffect ( () => {
-        (async () => {
-            console.log(await fetchData(categoria))
-            const results = await fetchData(categoria)
-            console.log(results)
-            setProductos(results.results)
-        })() 
-    }, [categoria])
-
     
-    if (!productos.length) return <LoaderComponent />;
+    useEffect ( () => {
+        const productosFiltrado = context.productos.filter ( (element) => element.category === cat)
+        setProductosXCategoria(productosFiltrado);
+    }, [cat]);
 
+    let productosAMostrar = [];
+    cat ? productosAMostrar = productosXCategoria : productosAMostrar = context.productos;
+    
+    if (!productosAMostrar.length) return <LoaderComponent />;
+
+    console.log(cat)
     return (
         <div className="App">
             <h5>
-                DESAFIO CLASE 11
+                DESAFIO CLASE 12
             </h5>
             <Saludo dataUsuario={usuario} title={'Bienvenido '}/>
-            <ItemList productos={productos} />
+            <ItemList productos={productosAMostrar}/>
         </div>
     )
 }

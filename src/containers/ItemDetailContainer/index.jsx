@@ -1,24 +1,21 @@
-import { useState, useEffect } from 'react';
-import { fetchData } from '../../utils/funciones';
+import { useState, useEffect, useContext } from 'react';
 import { ItemDetail } from '../../components/ItemDetail';
 import { useParams } from 'react-router-dom';
 import { LoaderComponent } from '../../components/LoaderComponent';
-
+import { CartContext } from '../../context/CartContext';
 
 export const ItemDetailContainer = () => {
-    const { id_producto } = useParams();
-    console.log(id_producto)
-    const categoria = `items/${id_producto}`;
+    const context = useContext(CartContext);
+    const { id } = useParams();
+    console.log(id)
     const [itemDetalle, setItemDetalle] = useState({});
-    console.log(id_producto)
+    console.log(id)
 
     useEffect ( () => {
-        (async () => {
-            const result = await fetchData(categoria);
-            console.log(result)
-            setItemDetalle(result)
-        })()
-    }, [id_producto])
+        const itemBuscado = context.productos.find ((element) => element.id === id);
+            console.log(itemBuscado)
+            setItemDetalle(itemBuscado);
+    }, [id])
 
     console.log(itemDetalle)
     return (

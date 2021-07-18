@@ -20,10 +20,10 @@ export const Nav = (props) => {
                             <Link to="/" class="nav-link active" aria-current="page">{menu[0]}</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to={`/categoria/${menu[1]}`} className="nav-link">{menu[1]}</Link>
+                            <Link to={`/categoria/cabello`} className="nav-link">{menu[1]}</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to={`/categoria/${menu[2]}`} className="nav-link">{menu[2]}</Link>
+                            <Link to={`/categoria/maquillaje`} className="nav-link">{menu[2]}</Link>
                         </li>                                                              
                         <li className="nav-item">
                             <Link to="/contacto" className="nav-link">{menu[3]}</Link>
@@ -31,7 +31,6 @@ export const Nav = (props) => {
                     </ul>
                 </div>
                 { context.cartWidget > 0 ? <Cart /> : console.log(context.cartWidget) }
-                {/* <Cart /> */}
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>                        
