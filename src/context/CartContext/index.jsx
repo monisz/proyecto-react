@@ -8,11 +8,22 @@ export const CartComponentContext = ({children}) => {
     const [carrito, setCarrito] = useState([]);
     const [precioTotal, setPrecioTotal] = useState(0);
     const [cartWidget, setCartWidget] = useState(0);
+    const [orden, setOrden] = useState({});
+
     console.log(carrito);
     console.log(precioTotal);
     console.log(cartWidget);
-
+    console.log(orden)
+    
     useEffect ( () => {
+        const carritoEnLocal = JSON.parse(localStorage.getItem('carrito'));
+        console.log(carritoEnLocal)
+        if (carritoEnLocal) {
+            setCarrito(carritoEnLocal);
+            setCartWidget(carritoEnLocal.reduce((ac, element) =>
+            ac += element.cantidad, 0))
+        }
+
         (async () => {
             const db = getFirestore();
             const collection = db.collection("productos")
@@ -25,8 +36,11 @@ export const CartComponentContext = ({children}) => {
 
 
     useEffect ( () => {
+        localStorage.setItem('carrito', JSON.stringify(carrito));
         actualizarPrecioTotal();
-    }, [carrito])
+        console.log(localStorage)
+    }, [carrito]);
+
 
 
     /* const addItem = ({item, cantidad}) => {
@@ -61,7 +75,18 @@ export const CartComponentContext = ({children}) => {
         }
         /* actualizarPrecioTotal(); */
         actualizarCartWidget(cantidad);
+        console.log(item.stock)
+        const cantidadAModificar = 0 - cantidad;
+        actualizarStock({item, cantidadAModificar})
     };
+
+    const actualizarStock = ({item, cantidadAModificar}) => {
+        console.log(cantidadAModificar)
+        console.log(item.stock)
+        item.stock = item.stock + cantidadAModificar;
+        console.log(item.stock)
+        console.log(item)
+    }
 
     /* const isInCart = (id) => {
         if (carrito.length > 0) {
@@ -81,8 +106,15 @@ export const CartComponentContext = ({children}) => {
         let carritoModif = carrito
         carritoModif.splice(posicion, 1)
         setCarrito(carritoModif)
+        //actualizar total y y localStorage en agregar funciona con el useEffect y
+        //en eliminar solo acá, por qué?
         actualizarPrecioTotal();
+        localStorage.setItem('carrito', JSON.stringify(carrito));
         actualizarCartWidget(-itemEnCarrito.cantidad);
+        /* const cantidadAModificar = itemEnCarrito.cantidad;
+        const item = carrito.find( (el) => el.id === itemEnCarrito.id)
+        console.log(item)
+        actualizarStock({item, cantidadAModificar}) */
     }
 
     const clear = () => {
@@ -105,9 +137,22 @@ export const CartComponentContext = ({children}) => {
         setCartWidget(cartWidget + cantidad);
     }
 
+    const crearOrden = (name, phone, email) => {
+        let orden = { buyer:{name, phone, email}, items: carrito, fecha: new Date(), total:precioTotal}
+        console.log(orden)
+        
+        const db = getFirestore();
+        db.collection("ordenes").add(orden).then(({id}) => {
+            orden = {ordenId: id, ...orden}
+            console.log(orden)
+            setOrden(orden);
+        });
+    }
+
+    console.log(orden)
 
     return (
-        <CartContext.Provider value={{addItem, removeItem, clear, productos, carrito, precioTotal, cartWidget}}>
+        <CartContext.Provider value={{addItem, removeItem, clear, crearOrden, productos, carrito, precioTotal, cartWidget, orden}}>
             {children}
         </CartContext.Provider>
     )

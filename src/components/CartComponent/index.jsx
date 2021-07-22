@@ -1,12 +1,17 @@
-import { React, useContext } from 'react';
+import { React, useContext, useState } from 'react';
 import { CartContext } from '../../context/CartContext';
 import { Link } from 'react-router-dom';
 import "./styles.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { LoaderComponent } from '../LoaderComponent';
 
 export const CartComponent = (props) => {
     const context = useContext(CartContext);
+    const [name, setName] = useState();
+    const [phone, setPhone] = useState();
+    const [email, setEmail] = useState();
+
 
     if (context.carrito.length === 0) { 
         return (
@@ -36,17 +41,27 @@ export const CartComponent = (props) => {
                 })}
                 <h4 className="carrito-total">Total del carrito: $ {context.precioTotal}</h4>
                 <div className="botones-carrito">
-                <button className="btn btn-primary">
-                    <Link className="botones-detail" to={"/"}>Seguir comprando</Link>
-                </button>
-                <button className="btn btn-primary" onClick={() => {context.clear()}}>
-                    <Link className="botones-detail" to={"/cart"}>Vaciar carrito</Link>
-                </button>
-                <button className="btn btn-primary">
-                    <Link className="botones-detail" to={"/cart"}>Terminar compra</Link>
-                </button>
+                    <button className="btn btn-primary">
+                        <Link className="botones-detail" to={"/"}>Seguir comprando</Link>
+                    </button>
+                    <button className="btn btn-primary" onClick={() => {context.clear()}}>
+                        <Link className="botones-detail" to={"/cart"}>Vaciar carrito</Link>
+                    </button>
+                    <button className="btn btn-primary" onClick={() => { 
+                        context.crearOrden(name, phone, email)
+                    }}>
+                        Terminar compra
+                    </button>
                 </div>
-            </>
+                <div>
+                    <input type="text" value={name} onInput={(el) => {setName(el.target.value)}} placeholder="nombre" />
+                    <input type="tel" value={phone} onInput={(el) => {setPhone(el.target.value)}} placeholder="teléfono"  />
+                    <input type="email" value={email} onInput={(el) => {setEmail(el.target.value)}} placeholder="email"/>
+                </div>
+                {(Object.keys(context.orden).length !== 0) ?
+                    <p>numero de orden {context.orden.ordenId}</p>
+                    : console.log("todavia no existe la orden")}
+            </> 
         )
     }
 }

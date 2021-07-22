@@ -22,7 +22,7 @@ export const ItemDetailContainer = () => {
         <div>
             {(Object.keys(itemDetalle).length === 0) ?
                 <LoaderComponent />                   
-                : <ItemDetail item={itemDetalle} /> }
+                : <ItemDetail item={itemDetalle} />}
         </div>
     )
 }
