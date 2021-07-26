@@ -19,7 +19,7 @@ function App() {
         </nav>
         <Switch>
           <Route exact path="/" component={ItemListContainer} />
-          <Route path="/contacto" component={ContactContainer} />
+          <Route path="/contacto"> <ContactContainer /> </Route>
           <Route path="/detalle/:id" component={ItemDetailContainer} />
           <Route path="/categoria/:cat" component={ItemListContainer} />
           <Route path="/cart" component={CartComponent} />

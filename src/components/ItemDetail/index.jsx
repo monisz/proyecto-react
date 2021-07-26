@@ -1,13 +1,29 @@
 import { ItemCount } from "../ItemCount"
 import './styles.css';
 import { Link } from "react-router-dom";
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { CartContext } from '../../context/CartContext';
 
 export const ItemDetail = ({item}) => {
   const context = useContext(CartContext);
-  console.log(item)
+  const [nuevoStock, setNuevoStock] = useState(0);
   
+  useEffect ( () => {
+    console.log("entra al useEffect")
+    console.log("setea con stock del item")
+    setNuevoStock(item.stock)
+    if (context.carrito.length > 0) {
+      console.log("entra al hay algo en carrito");
+      context.carrito.forEach((elemento) => {
+        if (elemento.item.id === item.id) {
+          console.log("entra al id igual") 
+          setNuevoStock(item.stock - elemento.cantidad) 
+          console.log("setea son stock - cantidad del carrito")
+        } 
+      })
+    }
+  }, [item, context.carrito]);
+
   function onAdd (contador) {
     console.log(item, contador)
     const cantidad = Number(contador)
@@ -15,7 +31,6 @@ export const ItemDetail = ({item}) => {
     context.addItem({item, cantidad})
   }
 
-  
   return (
     <div className="detalle">
       <div className="detalle-producto">
@@ -24,7 +39,8 @@ export const ItemDetail = ({item}) => {
           <h5 className="detalle-title">{item.name}</h5>
           <p className="detalle-text">{item.description || "Descripción del producto"}</p>
           <h5 className="detalle-precio">$ {item.price}</h5>
-          <ItemCount stock={item.stock} initial="1" onAdd={onAdd}/>
+          <ItemCount stock={nuevoStock} initial="1" onAdd={onAdd}/>
+          <p>Stock disponible: {nuevoStock}</p>
         </div>
       <div className="botones-detalle">
           <button className="btn btn-primary btn-detail">

@@ -10,13 +10,16 @@ export const ItemListContainer = () => {
     const context = useContext(CartContext);
     console.log(context.productos)
     const {cat} = useParams();
+    console.log(cat)
     const [productosXCategoria, setProductosXCategoria] = useState([]);
     const usuario = {name: "NN"};
     
     useEffect ( () => {
+        console.log("entro al useEffect de ItemListContainer")
         const productosFiltrado = context.productos.filter ( (element) => element.category === cat)
+        console.log(productosFiltrado)
         setProductosXCategoria(productosFiltrado);
-    }, [cat]);
+    }, [cat, context.productos]);
 
     let productosAMostrar = [];
     cat ? productosAMostrar = productosXCategoria : productosAMostrar = context.productos;

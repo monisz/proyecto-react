@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import "./styles.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { LoaderComponent } from '../LoaderComponent';
 
 export const CartComponent = (props) => {
     const context = useContext(CartContext);
@@ -26,7 +25,7 @@ export const CartComponent = (props) => {
         return (
             <>
                 <h2 className="carrito-titulo">Detalle del carrito</h2>
-                {context.carrito.map((elemento) =>{
+                {context.carrito.map((elemento) => {
                     return (
                         <div className="detalle-carrito">
                             <img className="detalle-carrito-imagen" src={elemento.item.img} alt={elemento.item.name} />
@@ -65,3 +64,5 @@ export const CartComponent = (props) => {
         )
     }
 }
+
+//<Link to={`/detalle/${elemento.id}`}></Link>}}>

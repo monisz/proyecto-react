@@ -6,23 +6,32 @@ import { CartContext } from '../../context/CartContext';
 
 export const ItemDetailContainer = () => {
     const context = useContext(CartContext);
-    const { id } = useParams();
+    console.log(context.productos)
+    const {id} = useParams();
     console.log(id)
     const [itemDetalle, setItemDetalle] = useState({});
-    console.log(id)
+    
 
     useEffect ( () => {
+        console.log("entra al useEffect de Detcontainer")
+        console.log(context.productos)
         const itemBuscado = context.productos.find ((element) => element.id === id);
             console.log(itemBuscado)
             setItemDetalle(itemBuscado);
-    }, [id])
+    }, [id, context.productos]);
 
     console.log(itemDetalle)
-    return (
-        <div>
-            {(Object.keys(itemDetalle).length === 0) ?
-                <LoaderComponent />                   
-                : <ItemDetail item={itemDetalle} />}
-        </div>
-    )
+    
+    if (itemDetalle.stock === 0) {
+        alert("No hay más stock disponible")
+    } else {
+        return (
+            <div>
+                {(Object.keys(itemDetalle).length === 0) ?
+                    <LoaderComponent />                   
+                    : <ItemDetail item={itemDetalle} />
+                }
+            </div>
+        )
+    }
 }
