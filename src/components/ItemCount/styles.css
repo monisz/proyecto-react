@@ -1,3 +1,9 @@
+.cantidades {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .item-count {
     margin-top: 5%;
     display: flex;
@@ -29,7 +35,22 @@
     max-width: 50%;
 }
 
+.btn-modificar {
+    width: 90%;
+    font-size: .9rem;
+}
+
 .btn-agregar:hover {
     font-weight:bolder;
     text-decoration: none;
+}
+
+.stock-boton {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.stock {
+    font-size: 0.9rem;
 }

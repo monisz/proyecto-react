@@ -7,9 +7,9 @@ export const ItemList = ({productos}) => {
         <div className="items">
             {productos.map(element => {
                 return (
-                    <spam key={element.id} > 
+                    <div key={element.id} > 
                         <Item producto={element} />
-                    </spam>
+                    </div>
                 )
             })}
         </div>

@@ -11,29 +11,36 @@
     margin: 2%;
     box-shadow: 2px 2px 10px  rgb(235, 62, 62);
     height: 30vh;
-    /* border: 1px solid rgb(235, 62, 62);*/
 }
 
 .detalle-carrito-imagen {
-    width: 18%;
-    height: 100%;
+    width: 12%;
+    height: 75%;
     margin-left: 2%;
 }
 
 .detalle-carrito-nombre {
-    margin-left: 5%;
-    width: 30%;
+    margin-left: 2%;
+    width: 20%;
 }
 
 .detalle-carrito-cantidad {
+    width: 2%;
+    font-size: 1rem;
+}
+
+.detalle-carrito-precio {
     width: 10%;
-    font-size: 1.2rem;
     display: flex;
     justify-content: flex-end ;
     margin-right: 2%;
 }
 
-.detalle-carrito-precio {
+.carrito-itemCount {
+    width: 18%;
+}
+
+.detalle-carrito-subtotal {
     width: 15%;
     display: flex;
     justify-content: flex-end ;

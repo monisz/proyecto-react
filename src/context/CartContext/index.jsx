@@ -105,10 +105,39 @@ export const CartComponentContext = ({children}) => {
         });
     }
 
+    const generarPago = async () => {
+        const carritoAPagar = carrito.map((element) => {
+            const ordenAPagar = {
+                title: element.item.name,
+                description: "",
+                picture_url: "",
+                category_id: element.item.id,
+                quantity: Number(element.cantidad),
+                currency_id: "ARS",
+                unit_price: Number(element.item.price),
+            };
+            return ordenAPagar;
+        });
+        console.log(carritoAPagar);
+        const response = await fetch("https://api.mercadopago.com/checkout/preferences",{
+            method: "POST",
+            headers: {
+                Authorization: "Bearer TEST-4559372510592656-052123-aff869a0f602f03b3b82c52239cf67db-80359143",
+            },
+            body: JSON.stringify({
+                items: carritoAPagar,
+            }),
+        });
+        const data = await response.json();
+        window.open(data.init_point, "_blank");
+        console.log(data)
+        clear();
+    }
+
     console.log(orden)
 
     return (
-        <CartContext.Provider value={{addItem, removeItem, clear, crearOrden, productos, carrito, precioTotal, cartWidget, orden}}>
+        <CartContext.Provider value={{addItem, removeItem, clear, crearOrden, generarPago, productos, carrito, precioTotal, cartWidget, orden}}>
             {children}
         </CartContext.Provider>
     )
