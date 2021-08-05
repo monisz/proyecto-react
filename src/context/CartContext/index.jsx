@@ -9,8 +9,12 @@ export const CartComponentContext = ({children}) => {
     const [precioTotal, setPrecioTotal] = useState(0);
     const [cartWidget, setCartWidget] = useState(0);
     const [orden, setOrden] = useState({});
+    const [cambioDB, setCambioDB] = useState(false);
+    console.log(cambioDB)
 
     useEffect ( () => {
+        setCambioDB(false);
+        console.log("setea en false");
         (async () => {
             const db = getFirestore();
             const collection = db.collection("productos")
@@ -19,8 +23,10 @@ export const CartComponentContext = ({children}) => {
             setProductos(response.docs.map( element => {
                 return {id:element.id, ...element.data()}
             }));
-        }) ();  
+        }) ();
+    }, [cambioDB]);
 
+    useEffect ( () => {
         const carritoEnLocal = JSON.parse(localStorage.getItem('carrito'));
         console.log(carritoEnLocal)
         if (carritoEnLocal) {
@@ -74,8 +80,9 @@ export const CartComponentContext = ({children}) => {
     }
 
     const clear = () => {
+        console.log("clear")
         setCarrito([]);
-        setPrecioTotal(0);
+        /* setPrecioTotal(0); */
         setCartWidget(0);
     }
 
@@ -93,8 +100,14 @@ export const CartComponentContext = ({children}) => {
         setCartWidget(cartWidget + cantidad);
     }
 
+    //probé Timestamp pero igual necesitaba una fx para
+    //poder mostrarlo, así que me quedé con la mía
     const crearOrden = (name, phone, email) => {
-        let orden = { buyer:{name, phone, email}, items: carrito, fecha: new Date(), total:precioTotal}
+        const fecha = formatearFecha();
+        let orden = { buyer:{name, phone, email}, 
+            items: carrito, 
+            fecha: fecha, //poner formatearFecha derecho??
+            total:precioTotal}
         console.log(orden)
         
         const db = getFirestore();
@@ -105,13 +118,24 @@ export const CartComponentContext = ({children}) => {
         });
     }
 
+    const formatearFecha = () => {
+        const hoy = new Date()
+        const hoyModificado = hoy.toISOString();
+        const fecha = hoyModificado.slice(0, 10);
+        const yyyy = fecha.slice(0, 4);
+        const mm = fecha.slice(5, 7);
+        const dd = fecha.slice(8);
+        const fechaFormat = dd + "-" + mm + "-" + yyyy;
+        return fechaFormat;
+    }
+
     const generarPago = async () => {
         const carritoAPagar = carrito.map((element) => {
             const ordenAPagar = {
                 title: element.item.name,
                 description: "",
                 picture_url: "",
-                category_id: element.item.id,
+                id: element.item.id,
                 quantity: Number(element.cantidad),
                 currency_id: "ARS",
                 unit_price: Number(element.item.price),
@@ -131,11 +155,24 @@ export const CartComponentContext = ({children}) => {
         const data = await response.json();
         window.open(data.init_point, "_blank");
         console.log(data)
+        actualizarStock();
         clear();
     }
-
+    
+    const actualizarStock = () => {
+        console.log("actualizarstock")
+        const db = getFirestore();
+        let productoAModificar = db.collection("productos");           
+        const batch = db.batch();
+        carrito.forEach( (el) => {
+            batch.update(productoAModificar.doc(el.item.id), { stock: el.item.stock - el.cantidad});
+        })
+        batch.commit().then();
+        setCambioDB(true);
+    }
+    
     console.log(orden)
-
+    
     return (
         <CartContext.Provider value={{addItem, removeItem, clear, crearOrden, generarPago, productos, carrito, precioTotal, cartWidget, orden}}>
             {children}

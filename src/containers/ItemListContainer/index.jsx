@@ -28,7 +28,7 @@ export const ItemListContainer = () => {
 
     console.log(cat)
     return (
-        <div className="App">
+        <div className="App fondo">
             <h5>
                 DESAFIO CLASE 13
             </h5>

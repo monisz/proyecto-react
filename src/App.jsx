@@ -9,6 +9,8 @@ import { ItemDetailContainer } from './containers/ItemDetailContainer';
 import { CartComponent } from './components/CartComponent';
 import { CartComponentContext } from './context/CartContext';
 import { Checkout } from './components/Checkout';
+import { Ordenes } from './components/Ordenes';
+
 
 function App() {
 
@@ -25,6 +27,7 @@ function App() {
           <Route path="/categoria/:cat" component={ItemListContainer} />
           <Route path="/cart" component={CartComponent} />
           <Route path="/checkout" component={Checkout} />
+          <Route path="/ordenes" component={Ordenes} />
         </Switch>
       </BrowserRouter>
     </CartComponentContext>

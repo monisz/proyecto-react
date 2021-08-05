@@ -1,21 +1,26 @@
-.checkout {
+.checkout-container {
     display: flex;
-    justify-content: space-evenly;
     flex-direction: column;
     align-items: center;
+    margin-top: 1%;
+}
+
+.checkout-detalle {
+    width: 60%;
 }
 
 .datos {
-    margin: 2% 4% 2% 4%;
     display: flex;
-    box-shadow: 5px 5px 5px 5px gray;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
 .ingresos {
-    display: flex;
-    flex-direction: column;
-    align-items:flex-start;
-    width: 40%;
+    margin-top: 2%;
+    box-shadow: 5px 5px 5px 5px gray;
+    padding: 8px 25px;
+    width: 50%;
 }
 
 .titulo-ingresos {
@@ -23,69 +28,23 @@
     justify-content:center;
 }
 
-.detalle-ingresos{
+.detalle-ingresos {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    width: 100%;
 }
 
 .input {
     border: 1px solid rgb(65, 64, 64);
     background-color: rgb(245 239 239);
     margin-bottom: 2%;
-}
-
-.ch-detalle {
-    margin-top: 2%;
-    width: 60%;
-    box-shadow: 5px 5px 5px 5px gray;
-    padding: 8px 25px;
-}
-
-.ch-detalle-tabla {
-    width: 100%;
-}
-
-.ch-detalle-titulo {
-    display: flex;
-    justify-content:center;
-    font-weight: bold;
-}
-
-.ch-detalle-renglones {
-    text-align: center;
-}
-
-.ch-detalle-producto {
-    width: 35%;
-    text-align: start;
-}
-
-.ch-detalle-cantidad {
-    width: 15%;
-}
-
-.ch-detalle-precio {
-    width: 25%;
-}
-
-.ch-detalle-subtotal {
-    width: 25%;
-}
-
-.total {
-    display: flex;
-    justify-content:flex-end;
-    width: 95%;
-    margin-top: 2%;
-    font-weight: bold;
+    height: 6vh;
 }
 
 .aceptar {
-    width: 20%;
-    margin-left: 6%;
-    margin-top: 8.5%;
+    margin-top: 2%;
+    display: flex;
+    justify-content: center;
 }
 
 .orden {

@@ -17,7 +17,7 @@ export const ItemDetailContainer = () => {
         console.log(context.productos)
         const itemBuscado = context.productos.find ((element) => element.id === id);
             console.log(itemBuscado)
-            setItemDetalle(itemBuscado);
+            setItemDetalle(itemBuscado)
     }, [id, context.productos]);
 
     console.log(itemDetalle)
