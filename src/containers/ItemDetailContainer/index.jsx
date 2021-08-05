@@ -11,7 +11,7 @@ export const ItemDetailContainer = () => {
     console.log(id)
     const [itemDetalle, setItemDetalle] = useState({});
     
-
+    
     useEffect ( () => {
         console.log("entra al useEffect de Detcontainer")
         console.log(context.productos)
@@ -22,15 +22,12 @@ export const ItemDetailContainer = () => {
 
     console.log(itemDetalle)
     
-    if (itemDetalle.stock === 0) {
-        alert("No hay más stock disponible")
+    if (!itemDetalle) {
+        return <LoaderComponent /> 
     } else {
         return (
             <div>
-                {(Object.keys(itemDetalle).length === 0) ?
-                    <LoaderComponent />                   
-                    : <ItemDetail item={itemDetalle} />
-                }
+                <ItemDetail item={itemDetalle} />
             </div>
         )
     }

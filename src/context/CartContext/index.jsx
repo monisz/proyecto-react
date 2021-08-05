@@ -44,7 +44,11 @@ export const CartComponentContext = ({children}) => {
 
     useEffect ( () => {
         localStorage.setItem('carrito', JSON.stringify(carrito));
-        actualizarPrecioTotal();
+        const total = carrito.reduce((ac, element) =>
+           ac += (element.item.price * element.cantidad)
+        , 0);
+        console.log(total)
+        setPrecioTotal(total);
         console.log(localStorage)
     }, [carrito]);
 
@@ -71,7 +75,7 @@ export const CartComponentContext = ({children}) => {
         console.log(isInCart(id).item.id)
         actualizarCartWidget(-isInCart(id).cantidad);
         let carritoModif = [];
-        carrito.map(elemento => {
+        carrito.forEach( (elemento) => {
             if (elemento.item.id !== isInCart(id).item.id) {
                 carritoModif.push(elemento);
             }
@@ -84,16 +88,6 @@ export const CartComponentContext = ({children}) => {
         setCarrito([]);
         /* setPrecioTotal(0); */
         setCartWidget(0);
-    }
-
-    const actualizarPrecioTotal = () => {
-        console.log(carrito)
-        const total = carrito.reduce((ac, element) =>
-           ac += (element.item.price * element.cantidad)
-        , 0);
-        console.log(total)
-        console.log(carrito)
-        setPrecioTotal(total);
     }
 
     const actualizarCartWidget = (cantidad) => {
