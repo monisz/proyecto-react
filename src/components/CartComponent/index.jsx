@@ -41,7 +41,7 @@ export const CartComponent = (props) => {
                             <p className="detalle-carrito-cantidad">{elemento.cantidad}</p>
                             <h6 className="detalle-carrito-precio">PU: $ {elemento.item.price}</h6> 
                             <div className="carrito-itemCount">
-                                <ItemCount stock={elemento.item.stock - elemento.cantidad} initial={elemento.cantidad} cartAdd={cartAdd} from={"CartComponent"} item={elemento.item} />
+                                <ItemCount stock={elemento.item.stock} initial={elemento.cantidad} cartAdd={cartAdd} from={"CartComponent"} item={elemento.item} />
                             </div>
                             <h6 className="detalle-carrito-subtotal">Subtotal: $ {elemento.item.price*elemento.cantidad}</h6> 
                             <button className="btn-eliminar-item" onClick={() => {context.removeItem(elemento.item.id)}}>

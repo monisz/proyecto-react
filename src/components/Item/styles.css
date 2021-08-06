@@ -1,7 +1,6 @@
 .item {
     width: 15rem;
     border-radius: 2%;
-    /* border: 1px solid rgb(235, 62, 62); */
     box-shadow: 2px 2px 10px rgb(235, 62, 62);
     margin-bottom: 5%;
     height: 23rem;

@@ -10,15 +10,15 @@ export const CartComponentContext = ({children}) => {
     const [cartWidget, setCartWidget] = useState(0);
     const [orden, setOrden] = useState({});
     const [cambioDB, setCambioDB] = useState(false);
-    console.log(cambioDB)
+    const [pagoGenerado, setPagoGenerado] = useState(false);
 
     useEffect ( () => {
         setCambioDB(false);
-        console.log("setea en false");
         (async () => {
             const db = getFirestore();
             const collection = db.collection("productos")
-            const response = await collection.get()
+            const soloConStock = collection.where('stock', '>', 0);
+            const response = await soloConStock.get()
             console.log("esta cargando productos firestore")
             setProductos(response.docs.map( element => {
                 return {id:element.id, ...element.data()}
@@ -37,9 +37,6 @@ export const CartComponentContext = ({children}) => {
     }, []);
     
     console.log(carrito);
-    console.log(precioTotal);
-    console.log(cartWidget);
-    console.log(orden)
     console.log(productos)
 
     useEffect ( () => {
@@ -84,9 +81,7 @@ export const CartComponentContext = ({children}) => {
     }
 
     const clear = () => {
-        console.log("clear")
         setCarrito([]);
-        /* setPrecioTotal(0); */
         setCartWidget(0);
     }
 
@@ -97,10 +92,10 @@ export const CartComponentContext = ({children}) => {
     //probé Timestamp pero igual necesitaba una fx para
     //poder mostrarlo, así que me quedé con la mía
     const crearOrden = (name, phone, email) => {
-        const fecha = formatearFecha();
+        setPagoGenerado(false);
         let orden = { buyer:{name, phone, email}, 
             items: carrito, 
-            fecha: fecha, //poner formatearFecha derecho??
+            fecha: formatearFecha(), //poner formatearFecha derecho??
             total:precioTotal}
         console.log(orden)
         
@@ -150,6 +145,7 @@ export const CartComponentContext = ({children}) => {
         window.open(data.init_point, "_blank");
         console.log(data)
         actualizarStock();
+        setPagoGenerado(true);
         clear();
     }
     
@@ -161,14 +157,11 @@ export const CartComponentContext = ({children}) => {
         carrito.forEach( (el) => {
             batch.update(productoAModificar.doc(el.item.id), { stock: el.item.stock - el.cantidad});
         })
-        batch.commit().then();
-        setCambioDB(true);
+        batch.commit().then(setCambioDB(true));
     }
     
-    console.log(orden)
-    
     return (
-        <CartContext.Provider value={{addItem, removeItem, clear, crearOrden, generarPago, productos, carrito, precioTotal, cartWidget, orden}}>
+        <CartContext.Provider value={{addItem, removeItem, clear, crearOrden, generarPago, productos, carrito, precioTotal, cartWidget, orden, pagoGenerado}}>
             {children}
         </CartContext.Provider>
     )

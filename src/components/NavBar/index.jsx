@@ -13,11 +13,11 @@ export const Nav = (props) => {
         <nav className="navbar navbar-expand-lg navbar-light barraNavegacion">
             <div className="container-fluid">
                 <img className="logo" src="/imagenes/logo-beauty2.png" alt="logo" />
-                <Link to="/" class="navbar-brand nombreTienda">Tienda Beauty</Link>
+                <Link to="/" className="navbar-brand nombreTienda">Tienda Beauty</Link>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li class="nav-item">
-                            <Link to="/" class="nav-link active" aria-current="page">{menu[0]}</Link>
+                            <Link to="/" className="nav-link active" aria-current="page">{menu[0]}</Link>
                         </li>
                         <li className="nav-item">
                             <Link to={`/categoria/cabello`} className="nav-link">{menu[1]}</Link>

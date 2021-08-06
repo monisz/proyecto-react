@@ -6,14 +6,14 @@ import { CartContext } from '../../context/CartContext';
 
 export const ItemDetail = ({item}) => {
   const context = useContext(CartContext);
-  const [nuevoStock, setNuevoStock] = useState(0);
+  const [stockDisponible, setStockDisponible] = useState(0);
   
   useEffect ( () => {
-    setNuevoStock(item.stock)
+    setStockDisponible(item.stock)
     if (context.carrito.length > 0) {
       context.carrito.forEach((elemento) => {
         if (elemento.item.id === item.id) {
-          setNuevoStock(item.stock - elemento.cantidad)
+          setStockDisponible(item.stock - elemento.cantidad)
         } 
       })
     }
@@ -32,8 +32,8 @@ export const ItemDetail = ({item}) => {
           <h5 className="detalle-title">{item.name}</h5>
           <p className="detalle-text">{item.description || "Descripción del producto"}</p>
           <h5 className="detalle-precio">$ {item.price}</h5>
-          <ItemCount stock={nuevoStock} initial="1" onAdd={onAdd} from={"ItemDetail"}/>
-          <p>Stock disponible: {nuevoStock}</p>
+          <ItemCount stock={stockDisponible} initial="1" onAdd={onAdd} from={"ItemDetail"}/>
+          {<p>Stock disponible: {stockDisponible}</p>}
         </div>
         <div className="botones-detalle">
           <button className="btn btn-primary btn-detail">
