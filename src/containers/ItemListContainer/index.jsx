@@ -1,4 +1,3 @@
-import { Saludo } from '../../components/saludo';
 import { useState, useEffect, useContext,  } from 'react';
 import { ItemList } from '../../components/ItemList';
 import "./styles.css";
@@ -8,16 +7,11 @@ import { useParams } from 'react-router-dom';
 
 export const ItemListContainer = () => {
     const context = useContext(CartContext);
-    console.log(context.productos)
     const {cat} = useParams();
-    console.log(cat)
     const [productosXCategoria, setProductosXCategoria] = useState([]);
-    const usuario = {name: "NN"};
     
     useEffect ( () => {
-        console.log("entro al useEffect de ItemListContainer")
-        const productosFiltrado = context.productos.filter ( (element) => element.category === cat)
-        console.log(productosFiltrado)
+        const productosFiltrado = context.productos.filter ( (element) => element.category === cat);
         setProductosXCategoria(productosFiltrado);
     }, [cat, context.productos]);
 
@@ -26,10 +20,9 @@ export const ItemListContainer = () => {
     
     if (!productosAMostrar.length) return <LoaderComponent />;
 
-    console.log(cat)
     return (
         <div className="App fondo">
-            <Saludo dataUsuario={usuario} title={'Bienvenido '}/>
+            <h3>Bienvenido a tu Tienda Beauty</h3>
             <ItemList productos={productosAMostrar}/>
         </div>
     )

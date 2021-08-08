@@ -6,13 +6,13 @@ import { CartContext } from '../../context/CartContext';
 
 const menu = ['Home', 'Cuidado del cabello', 'Make-up', 'Contacto']
 
-export const Nav = (props) => {
+export const Nav = () => {
     const context = useContext(CartContext);
     
     return (
         <nav className="navbar navbar-expand-lg navbar-light barraNavegacion">
             <div className="container-fluid">
-                <img className="logo" src="/imagenes/logo-beauty2.png" alt="logo" />
+                <img className="logo" src="/imagenes/logo-beauty2.png" alt="logo Tienda Beauty" />
                 <Link to="/" className="navbar-brand nombreTienda">Tienda Beauty</Link>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
@@ -30,10 +30,10 @@ export const Nav = (props) => {
                         </li>
                     </ul>
                 </div>
-                { context.cartWidget > 0 ? <Cart /> : console.log(context.cartWidget) }
+                { context.cartWidget > 0 ? <Cart /> : console.log(context.cartWidget) } 
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
-                </button>                        
+                </button>                      
             </div>
         </nav>
     )

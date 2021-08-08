@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import { CartContext } from '../../context/CartContext';
 import { Link } from 'react-router-dom';
 
-export const Cart = (props) => {
+export const Cart = () => {
     const context = useContext(CartContext);
 
     return (

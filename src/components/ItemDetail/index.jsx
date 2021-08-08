@@ -1,4 +1,4 @@
-import { ItemCount } from "../ItemCount"
+import { ItemCount } from "../ItemCount";
 import './styles.css';
 import { Link } from "react-router-dom";
 import { useContext, useState, useEffect } from 'react';
@@ -20,8 +20,8 @@ export const ItemDetail = ({item}) => {
   }, [item, context.carrito]);
 
   function onAdd (contador) {
-    const cantidad = Number(contador)
-    context.addItem({item, cantidad})
+    const cantidad = Number(contador);
+    context.addItem({item, cantidad});
   }
 
   return (
@@ -36,11 +36,11 @@ export const ItemDetail = ({item}) => {
           {<p>Stock disponible: {stockDisponible}</p>}
         </div>
         <div className="botones-detalle">
-          <button className="btn btn-primary btn-detail">
-            <Link className="botones-detail" to={"/"}>Seguir comprando</Link>
+          <button className="btn btn-danger btn-detail">
+            <Link className="boton" to={"/"}>Seguir comprando</Link>
           </button>
-          <button className="btn btn-primary btn-detail">
-            <Link className="botones-detail" to={"/cart"}>Ir al carrito</Link>
+          <button className="btn btn-danger btn-detail">
+            <Link className="boton" to={"/cart"}>Ir al carrito</Link>
           </button>
         </div>
       </div>

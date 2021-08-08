@@ -1,4 +1,4 @@
-# Tienda Beauty
+# Proyecto-React (Tienda Beauty)
 
 ## Este es mi proyecto en el curso de React.
 ## Es un e-commerce genérico, pero en este caso está aplicado a productos de belleza.
@@ -8,18 +8,51 @@ Se va modificando de acuerdo a los desafíos propuestos en el curso.
 React
 HTML
 CSS
-Se incluyó Bootstrap (utilizado para diferentes estilos de la App) 
-y Fontawesome (por ahora solo utilizado para el ícono del carrito)
-También utilicé Canva para crear el logo de la tienda.
+Se incluyó:
+- Bootstrap, utilizado para diferentes estilos de la App.
+- Fontawesome, utilizado para los íconos.
+- Canva para crear el logo de la tienda.
+- Firebase, para crear la base de datos de productos y órdenes de compra.
 
 ###
-Por el momento, elegí que los productos se traigan desde la API de ML, para poder practicar su uso.
-Quizás, con el avance del curso cambie a un json propio, si bien las primeras entregas fueron de esa manera.
+En los primeros commits se utiliza un json propio para cargar los productos.
+Más adelante, se cargan desde la API de ML.
+En los últimos, ya se utiliza Firebase-Firestore.
 
+
+###
+To run this site you must:
+
+Clone the repository
+
+Install all dependencies npm i
+
+Create a firestore project
+
+Create a src/firebaseConfig.js file with your firebase configuration
+
+export const firebaseConfig = {
+    apiKey: "<API_KEY>",
+    authDomain: "<PROJECT_ID.firebaseapp.com>",
+    databaseURL: "<https://PROJECT_ID.firebaseio.com>",
+    projectId: "<PROJECT_ID>",
+    storageBucket: "<PROJECT_ID.appspot.com>",
+    messagingSenderId: "<SENDER_ID>",
+    appId: "<APP_ID>",
+    measurementId: "<G-MEASUREMENT_ID>",
+};
+Now you can populate your firestore database by running node json-to-firestore.js
+
+And that's it! you can now run a local server with npm start
+
+If you are setting a different port than 3000 in localhost modify the base of index.html <base href = "http://localhost:3000"/>
 
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+
+
 
 ## Available Scripts
 

@@ -34,11 +34,19 @@
     justify-content: space-around;
 }
 
-.input {
+.input-datos {
     border: 1px solid rgb(65, 64, 64);
     background-color: rgb(245 239 239);
     margin-bottom: 2%;
     height: 6vh;
+}
+
+.input-datos:valid {
+    border: 1px solid rgb(4, 196, 4);
+}
+
+.input-datos:invalid {
+    border: 1px solid rgb(252, 65, 65);
 }
 
 .aceptar {

@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 
 export const Ordenes = () => {
     const context = useContext(CartContext);
-    console.log(context.pagoGenerado)
     
     if (Object.keys(context.orden).length === 0) {
         return ( <LoaderComponent /> )
@@ -25,14 +24,13 @@ export const Ordenes = () => {
                         <DetalleCompra />  
                     </div>
                     <div className="btn-pagar">
-                    {console.log(context.pagoGenerado)}
                         {!context.pagoGenerado ? 
-                        <button className="btn btn-primary" onClick={() => { 
-                            context.generarPago()}}>Confirmar reserva y pagar
-                        </button>
-                        :   <button className="btn btn-primary">
-                                <Link className="botones-detail" to={"/"}>Seguir comprando</Link>
+                            <button className="btn btn-danger boton" onClick={() => { 
+                                context.generarPago()}}>Confirmar compra y pagar
                             </button>
+                            :   <button className="btn btn-danger">
+                                    <Link className="boton" to={"/"}>Seguir comprando</Link>
+                                </button>
                         }
                     </div>
                 </div>   
@@ -40,13 +38,3 @@ export const Ordenes = () => {
         )
     }          
 }
-
-/* {console.log(context.cambioDB)}
-                        {!context.cambioDB ? 
-                        <button className="btn btn-primary" onClick={() => { 
-                            context.generarPago()}}>Confirmar reserva y pagar
-                        </button>
-                        : <button className="btn btn-primary">
-                            <Link className="botones-detail" to={"/"}>Seguir comprando</Link>
-                            </button>
-                        } */

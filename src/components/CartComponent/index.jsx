@@ -6,28 +6,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ItemCount } from '../ItemCount';
 
-export const CartComponent = (props) => {
+export const CartComponent = () => {
     const context = useContext(CartContext);
     let cantidad = 0;
 
     function cartAdd ({contador, initial, item}) {
-        console.log(item, contador, initial)
-        if (contador > initial) {
-            cantidad = contador - initial
-        } else { cantidad = -(initial - contador) }   
-        console.log(cantidad)
+        contador > initial ? cantidad = contador - initial
+                            : cantidad = -(initial - contador)
         context.addItem({item, cantidad})
     }
 
-
+    
     if (context.carrito.length === 0) { 
         return (
-            <>
-                <h1 className="carrito-titulo">Tu carrito está vacío</h1>
-                <button className="btn btn-primary">
-                    <Link className="botones-detail"  to={"/"}>Volver a la lista de productos</Link>
+            <div className="carrito-vacio">
+                <h2 className="carrito-titulo">Tu carrito está vacío</h2>
+                <button className="btn btn-danger">
+                    <Link className="boton"  to={"/"}>Volver a la lista de productos</Link>
                 </button>
-            </>
+            </div>
             )
     } else {
         return (
@@ -52,14 +49,14 @@ export const CartComponent = (props) => {
                 })}
                 <h5 className="carrito-total">Total del carrito: $ {context.precioTotal}</h5>
                 <div className="botones-carrito">
-                    <button className="btn btn-primary">
-                        <Link className="botones-detail" to={"/"}>Seguir comprando</Link>
+                    <button className="btn btn-danger">
+                        <Link className="boton" to={"/"}>Seguir comprando</Link>
                     </button>
-                    <button className="btn btn-primary" onClick={() => {context.clear()}}>
-                        <Link className="botones-detail" to={"/cart"}>Vaciar carrito</Link>
+                    <button className="btn btn-danger" onClick={() => {context.clear()}}>
+                        <Link className="boton" to={"/cart"}>Vaciar carrito</Link>
                     </button>
-                    <button className="btn btn-primary">
-                        <Link className="botones-detail" to={"/checkout"}>Terminar compra</Link>
+                    <button className="btn btn-danger">
+                        <Link className="boton" to={"/checkout"}>Terminar compra</Link>
                     </button>
                 </div>
             </> 

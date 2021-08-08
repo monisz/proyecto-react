@@ -16,10 +16,9 @@ export const CartComponentContext = ({children}) => {
         setCambioDB(false);
         (async () => {
             const db = getFirestore();
-            const collection = db.collection("productos")
+            const collection = db.collection("productos");
             const soloConStock = collection.where('stock', '>', 0);
-            const response = await soloConStock.get()
-            console.log("esta cargando productos firestore")
+            const response = await soloConStock.get();
             setProductos(response.docs.map( element => {
                 return {id:element.id, ...element.data()}
             }));
@@ -28,31 +27,23 @@ export const CartComponentContext = ({children}) => {
 
     useEffect ( () => {
         const carritoEnLocal = JSON.parse(localStorage.getItem('carrito'));
-        console.log(carritoEnLocal)
         if (carritoEnLocal) {
             setCarrito(carritoEnLocal);
             setCartWidget(carritoEnLocal.reduce((ac, element) =>
             ac += element.cantidad, 0));
         }
     }, []);
-    
-    console.log(carrito);
-    console.log(productos)
 
     useEffect ( () => {
         localStorage.setItem('carrito', JSON.stringify(carrito));
         const total = carrito.reduce((ac, element) =>
            ac += (element.item.price * element.cantidad)
         , 0);
-        console.log(total)
         setPrecioTotal(total);
-        console.log(localStorage)
     }, [carrito]);
 
 
     const addItem = ({item, cantidad}) => {
-        console.log(item);
-        console.log(cantidad)
         if (isInCart(item.id)) {
             const carritoModif = carrito.map(elemento => {
                 if (elemento.item.id === item.id) {
@@ -69,7 +60,6 @@ export const CartComponentContext = ({children}) => {
     const isInCart = id => carrito.find(element => element.item.id === id);
     
     const removeItem = (id) => {
-        console.log(isInCart(id).item.id)
         actualizarCartWidget(-isInCart(id).cantidad);
         let carritoModif = [];
         carrito.forEach( (elemento) => {
@@ -95,14 +85,13 @@ export const CartComponentContext = ({children}) => {
         setPagoGenerado(false);
         let orden = { buyer:{name, phone, email}, 
             items: carrito, 
-            fecha: formatearFecha(), //poner formatearFecha derecho??
-            total:precioTotal}
-        console.log(orden)
+            fecha: formatearFecha(),
+            total: precioTotal,
+            estado: "generada"};
         
         const db = getFirestore();
         db.collection("ordenes").add(orden).then(({id}) => {
-            orden = {ordenId: id, ...orden}
-            console.log(orden)
+            orden = {ordenId: id, ...orden};
             setOrden(orden);
         });
     }
@@ -131,7 +120,6 @@ export const CartComponentContext = ({children}) => {
             };
             return ordenAPagar;
         });
-        console.log(carritoAPagar);
         const response = await fetch("https://api.mercadopago.com/checkout/preferences",{
             method: "POST",
             headers: {
@@ -143,14 +131,12 @@ export const CartComponentContext = ({children}) => {
         });
         const data = await response.json();
         window.open(data.init_point, "_blank");
-        console.log(data)
         actualizarStock();
         setPagoGenerado(true);
         clear();
     }
     
     const actualizarStock = () => {
-        console.log("actualizarstock")
         const db = getFirestore();
         let productoAModificar = db.collection("productos");           
         const batch = db.batch();
